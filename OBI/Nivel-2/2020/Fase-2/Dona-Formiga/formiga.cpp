@@ -1,31 +1,44 @@
+//accepted 40%
 #include <iostream>
 #include <vector>
+#include <queue>
 
-void DFS (std::vector<std::vector<int>> graph, int heights[], bool visited[], int src, int& cnt) {
-    visited[src] = true;
-    ++cnt;
-    for (int neighbor : graph[src]) {
-        if (!visited[neighbor] && heights[src] > heights[neighbor]) DFS(graph, heights, visited, neighbor, cnt);
+int BFS (std::vector<std::vector<int>> graph, int V, int start) {
+    std::queue<int> q;
+    int distances[V];
+    for (int i = 0; i < V; ++i) distances[i] = 0;
+    int src, cnt = 0;
+    int srcDistance, neighborDistance;
+    q.push(start);
+    while (!q.empty()) {
+        src = q.front();
+        q.pop();
+        srcDistance = distances[src];
+        if (srcDistance > cnt) cnt = srcDistance;
+        for (int neighbor : graph[src]) {
+            q.push(neighbor);
+            neighborDistance = distances[neighbor];
+            if (neighborDistance < srcDistance+1) distances[neighbor] = srcDistance+1;
+        }
     }
+    return cnt;
 }
 
 int main() {
-    int V, E, src, connected = -1;
+    int V, E, src;
     std::cin>>V>>E>>src;
     int heights[V], u, v;
-    bool visited[V];
-    for (int i = 0; i < V; ++i) {
-        std::cin>>heights[i];
-        visited[i] = false;
-    }
+    for (int i = 0; i < V; ++i) std::cin>>heights[i];
     std::vector<std::vector<int>> graph (V);
     for (int i = 0; i < E; ++i) {
         std::cin>>u>>v;
         --u; --v;
-        graph[u].push_back(v);
-        graph[v].push_back(u);
+        if (heights[u] > heights[v]) {
+            graph[u].push_back(v);
+        } else {
+            graph[v].push_back(u);
+        }
     }
-    DFS (graph, heights, visited, src-1, connected);
-    std::cout<<connected<<"\n";
+    std::cout<<BFS(graph, V, src-1)<<"\n";
     return 0;
 }
