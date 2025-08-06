@@ -1,5 +1,5 @@
-//probably accepted with the implementation
-//of prefix sums:
+//Level 1, phase 1, 2017 question: Segredo do Cofre
+//incrementation of prefix sums:
 //table of frequency of each digit of each 1..i interval
 #include <stdio.h>
 

@@ -1,4 +1,4 @@
-//probably accepted
+//Level 1, 2017, phase 1 question: Teleférico
 #include <stdio.h>
 
 int main() {

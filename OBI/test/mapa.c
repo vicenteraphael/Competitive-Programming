@@ -27,12 +27,10 @@ void dfs (int sx, int sy) {
 
 int main() {
    scanf ("%d %d", &l, &c);
-   getchar();
    for (int i = 0; i < l; ++i) {
         for (int j = 0; j < c; ++j) {
-            scanf ("%c", &matrix[i][j]);
+            scanf (" %c", &matrix[i][j]);
         }
-        getchar();
    }
    for (int i=0;i<l;++i) {
        for (int j=0;j<c;++j) {

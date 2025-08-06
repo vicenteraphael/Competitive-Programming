@@ -1,4 +1,4 @@
-//level 1, 2007, phase 2 exercise: probably accepted
+//level 1, 2007, phase 2 exercise: Pão a Metro
 #include <stdio.h>
 
 #define MAX 10000

@@ -1,5 +1,5 @@
-//probably accepted
-#include <iostream>
+// Level 2, 2017, phase 2 question (Frete)
+#include <cstdio>
 #include <queue>
 
 using namespace std;
@@ -7,10 +7,10 @@ using namespace std;
 typedef pair<int, int> pii;
 typedef vector<vector<pii>> Graph;
 
-int dijkstra (Graph graph, int n) {
+int dijkstra (Graph& graph, int n) {
     int dist[n], mark[n];
     for (int i=0;i<n;++i) {
-        dist[i] = 1001;
+        dist[i] = 1e9;
         mark[i] = 0;
     }
     dist[0] = 0;

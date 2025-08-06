@@ -1,5 +1,6 @@
-//probably accepted using frequency of prefix sums
-#include <stdio.h>
+//Level 2, 2019, phase 1 question: Soma
+//Dunno how, but I got TLE (50/100) ;-;
+#include <cstdio>
 #include <unordered_map>
 
 int main() {
