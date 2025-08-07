@@ -1,47 +1,35 @@
 #include <iostream>
 #include <map>
 
-void ins (std::map <int, int>& ftimes, int el) {
-    auto it = ftimes.find(el);
-    if (it == ftimes.end()) ftimes[el] = 0;
+std::map<int, int> Time;
+bool isWaiting[101];
+
+void ins (int frend) {
+    auto it = Time.find(frend);
+    if (it == Time.end()) Time[frend] = 0;
 }
 
-void update_time (std::map<int, int>& ftimes, bool iswaiting[], int amount) {
-    for (auto it : ftimes) {
-        if (iswaiting[it.first]) ftimes[it.first] += amount;
-    }
+void update_time (int amount) {
+    for (auto it : Time) if (isWaiting[it.first]) Time[it.first] += amount;
 }
 
 int main() {
 	int cases, frend, cnt = 0;
 	char action;
-	std::map<int, int> ftimes;
-	bool iswaiting[101];
-	for (int i = 0; i < 101; ++i) iswaiting[i] = false;
-	std::cin>>cases;
+	scanf("%d", &cases);
 	for (int i = 0; i < cases; ++i) {
-	    std::cin>>action>>frend;
-	    if (action == 'T') {
-	        update_time(ftimes, iswaiting, frend);
-	    }
-	    else if (cnt % 2 != 0) {
-	        update_time(ftimes, iswaiting, 1);
-	        ++cnt;
-	    }
+	    scanf(" %c %d", &action, &frend);
+	    if (action == 'T') update_time(frend);
+	    else if (cnt % 2 != 0) {update_time(1); ++cnt;}
 	    if (action == 'R') {
-	        ins(ftimes, frend);
-	        iswaiting[frend] = true;
-	    } else {
-	        iswaiting[frend] = false;
+	        ins(frend);
+	        isWaiting[frend] = true;
 	    }
+        else isWaiting[frend] = false;
 	    ++cnt;
 	}
-	for (auto it : ftimes) {
-	    if (iswaiting[it.first]) {
-	        std::cout<<it.first<<" -1\n";   
-	    } else {
-	        std::cout<<it.first<<" "<<it.second<<"\n";
-	    }
+	for (auto it : Time) {
+	    (isWaiting[it.first]) ? printf("%d -1\n", it.first) : printf("%d %d\n", it.first, it.second);
 	}
 	return 0;
 }
